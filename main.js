@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import gsap from "gsap";
 import "./style.scss";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
@@ -48,6 +49,7 @@ controls.enableDamping = true;
 controls.enablePan = false;
 controls.enableZoom = false;
 controls.autoRotate = true;
+
 // Resize
 window.addEventListener("resize", () => {
   sizes.width = window.innerWidth;
@@ -63,3 +65,10 @@ const loop = () => {
   window.requestAnimationFrame(loop);
 };
 loop();
+
+// // Timeline
+const tl = gsap.timeline({
+  defaults: { duration: 1 },
+});
+tl.fromTo(mesh.scale, { z: 0, x: 0, y: 0 }, { z: 1, x: 1, y: 1 });
+tl.fromTo("#title", { opacity: 0 }, { opacity: 1 });
